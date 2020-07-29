@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/InputServlet")
 public class InputServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String password,md5;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,18 +30,16 @@ public class InputServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Original password: ").append(md5);
-		response.getWriter().append("\nEncrypted password: ").append(password);
-	
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		password = request.getParameter("password");
-		md5 = getSecurePassword(password);
-		response.sendRedirect("hashed.jsp");
+		String password = request.getParameter("password");
+		String md5 = getSecurePassword(password);
+		response.getWriter().append("Original password: ").append(password).append("\nEncrypted password: ").append(md5);
 	}
 	
 	/**
